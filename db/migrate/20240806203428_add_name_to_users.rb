@@ -1,4 +1,4 @@
-class AddProfileToUsers < ActiveRecord::Migration[6.1]
+class AddNameToUsers < ActiveRecord::Migration[6.1]
   def change
     unless column_exists?(:users, :avatar)
       add_column :users, :avatar, :string
@@ -9,4 +9,3 @@ class AddProfileToUsers < ActiveRecord::Migration[6.1]
     add_column :users, :bio, :text
   end
 end
-
