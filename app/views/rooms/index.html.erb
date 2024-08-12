@@ -1,0 +1,42 @@
+<p id="notice"><%= notice %></p>
+
+<h1>登録済み一覧</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>画像</th>
+      <th>施設名</th>
+      <th>紹介文</th>
+      <th>料金</th>
+      <th>作成日</th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @rooms.each do |room| %>
+      <tr>
+        <td>
+          <%= image_tag room.image.present? ? room.image.url : '/images/default-image-4e0ac6b8d01335b5b22fe6586af13644ae51dddb6aeabf35b9174e80f13cd09d.png', size: "100x100" %>
+        </td>
+        <td>
+          <%= link_to room.name, room_path(room) %>
+        </td>
+        <td>
+          <%= truncate(room.description, length: 50) %>
+        </td>
+        <td>
+          <%= number_with_delimiter(room.price.to_i) %>/日
+        </td>
+        <td>
+          <%= room.created_at.strftime("%Y/%m/%d") %>
+        </td>
+        <td>
+          <%= link_to 'Edit', edit_room_path(room) %>
+          <%= button_to 'Destroy', room, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

@@ -1,0 +1,21 @@
+<h1>アカウント</h1>
+
+<p>
+  <strong>メールアドレス:</strong>
+  <%= @user.email %>
+</p>
+
+<p>
+  <strong>パスワード:</strong>
+  *********
+</p>
+
+<%= link_to '編集', edit_user_path(@user) %>
+
+<%= link_to 'アカウント', user_path(@user) %>
+<%= link_to 'プロフィール', profile_path %> 
+
+<footer>
+    <p>Potepan Share</p>
+    <p>Copyright © Potepan Share 2024 All rights reserved</p>
+</footer>

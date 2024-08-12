@@ -1,0 +1,46 @@
+<div class="area_content">
+  <%= form_with url: search_rooms_path, method: :get, local: true do %>
+    <div>
+      <%= label_tag :area, 'エリア名を入力' %>
+      <%= text_field_tag :area, params[:area] %>
+    </div>
+
+    <div>
+      <%= label_tag :query, 'キーワード名を入力' %>
+      <%= text_field_tag :query, params[:query] %>
+    </div>
+
+    <%= submit_tag '検索' %>
+  <% end %>
+</div>
+
+<p id="notice"><%= notice %></p>
+
+<h1><%= @room.name %></h1>
+
+<%= image_tag @room.image.url || asset_path('default_room_image.png') %>
+<p><%= @room.description %></p>
+<p>宿泊料金: <%= number_with_delimiter(@room.price.to_i) %>/日</p>
+
+
+<%= link_to '戻る', :back %> |
+<%= link_to 'Edit', edit_room_path(@room) %>
+
+<%= form_with model: [@room, Reservation.new], local: true do |f| %>
+  <div>
+    <%= f.label :check_in_date, 'チェックイン日' %>
+    <%= f.date_field :check_in_date, required: true %>
+  </div>
+
+  <div>
+    <%= f.label :check_out_date, 'チェックアウト日' %>
+    <%= f.date_field :check_out_date, required: true %>
+  </div>
+
+  <div>
+    <%= f.label :number_of_guests, '人数' %>
+    <%= f.number_field :number_of_guests, value: 1, min: 1, required: true %>
+  </div>
+
+  <%= f.submit '予約する' %>
+<% end %>
