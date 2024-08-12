@@ -1,0 +1,31 @@
+<div class="area_content">
+<%= form_with url: search_rooms_path, method: :get, local: true do %>
+  <div>
+    <%= label_tag :area, 'エリア名を入力' %>
+    <%= text_field_tag :area, params[:query] %>
+  </div>
+
+  <div>
+    <%= label_tag :query, 'キーワード名を入力' %>
+    <%= text_field_tag :query, params[:query] %>
+  </div>
+
+  <%= submit_tag '検索' %>
+<% end %>
+</div>
+
+<p><%= @total_count %>件が見つかりました。</p>
+
+<% if @rooms.any? %>
+  <ul>
+    <% @rooms.each do |room| %>
+      <li>
+        <%= room.name %><br>
+        <%= room.address %><br>
+        <%= room.description %><br>
+        <%= number_with_delimiter(room.price.to_i) %>/日
+        <%= link_to '詳細', room_path(room) %>
+      </li>
+    <% end %>
+  </ul>
+<% end %>

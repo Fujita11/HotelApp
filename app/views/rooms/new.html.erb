@@ -1,0 +1,59 @@
+<h1>新規登録</h1>
+
+<%= form_with(model: @room, local: true) do |form| %>
+  <% if @room.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@room.errors.count, "error") %> prevented this room from being saved:</h2>
+      <ul>
+        <% @room.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.label :施設名 %>
+    <%= form.text_field :name %>
+  </div>
+
+  <div>
+    <%= form.label :施設詳細 %>
+    <%= form.text_area :description %>
+  </div>
+
+  <div>
+    <%= form.label :料金 %>
+    <%= form.number_field :price %>
+  </div>
+
+  <div>
+    <%= form.label :住所 %>
+    <%= form.text_field :address %>
+  </div>
+
+  <div>
+    <%= form.label :施設画像 %>
+    <%= form.file_field :image %>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>
+
+<%= link_to 'キャンセル', rooms_path %>
+
+
+<%= form_with(model: @room, local: true) do |form| %>
+  <% if @room.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@room.errors.count, "error") %> prevented this room from being saved:</h2>
+      <ul>
+        <% @room.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+<% end %>

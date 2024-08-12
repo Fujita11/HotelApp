@@ -1,0 +1,13 @@
+<h1>予約済み一覧</h1>
+
+<% @reservations.each do |reservation| %>
+  <div>
+    <%= image_tag reservation.room.image.url %>
+    <h2>施設名: <%= reservation.room.name %></h2>
+    <p>紹介文: <%= reservation.room.description %></p>
+    <p>合計料金: <%= number_to_currency(reservation.total_price, unit: "¥", precision: 0) %></p>
+    <p>チェックイン <%= reservation.check_in_date.strftime("%Y/%m/%d") %></p>
+    <p>チェックアウト <%= reservation.check_out_date.strftime("%Y/%m/%d") %></p>
+    <p>予約確定日時: <%= reservation.created_at.in_time_zone('Tokyo').strftime('%Y/%m/%d %H:%M') %></p>
+  </div>
+<% end %>

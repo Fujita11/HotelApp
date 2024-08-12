@@ -2,15 +2,41 @@
 <html>
   <head>
     <title>HotelApp</title>
-    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
   <body>
+    <div class="header">
+      <%= link_to 'Potepan Share', root_path %>
+
+      <% if user_signed_in? %>
+        <div class="user-menu">
+          <% if current_user.avatar.present? %>
+            <%= image_tag current_user.avatar.url, class: 'user-avatar' %>
+          <% end %>
+          <input type="checkbox" id="user-menu-toggle" class="user-menu-toggle">
+          <label for="user-menu-toggle" class="user-menu-label">
+            <%= current_user.name %>
+          </label>
+          <div class="dropdown-menu">
+           <%= link_to '施設の新規登録', new_room_path, class: 'dropdown-item' %>
+           <%= link_to '予約済み一覧', reservations_path, class: 'dropdown-item' %>
+           <%= link_to '登録済み一覧', rooms_path, class: 'dropdown-item' %>
+           <%= link_to 'アカウント設定', user_path(current_user), class: 'dropdown-item' %>
+           <%= form_with url: destroy_user_session_path, method: :delete, local: true do %>
+            <%= submit_tag 'ログアウト', class: 'dropdown-item' %>
+           <% end %>
+          </div>
+        </div>
+      <% else %>
+        <%= link_to 'ログイン', new_user_session_path %> |
+        <%= link_to '新規登録', new_user_registration_path %>
+      <% end %>
+    </div>
+
     <%= yield %>
   </body>
 </html>
